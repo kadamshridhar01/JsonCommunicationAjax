@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#getButton").click(function(){
+        $.get("http://localhost:8080/JsonCommunicationAjax/getApplicationList", function(data, status){
+           	$.each(data,function(index, element) {
+           	console.log(element.applicationID);
+           	});
+        });
+    });
+    
+    
+    $("#postButton").click(function(){
+       
+       
+       $.ajax({
+		             type: "POST",
+		             contentType: "application/json",
+		             url: "http://localhost:8080/JsonCommunicationAjax/sendApplication",
+		             data: {
+						"applicationID": 1,
+						"dependentAppID": 52,
+						"parentId": 33,
+						"list":[
+						{},{}]
+						
+													},
+		             dataType: 'json',
+		             timeout: 600000,
+		             success: function (data) {
+		                 console.log("post data \n"+data);
+		             },
+		             error: function (e) {
+		                
+		             }
+			});
+
+       
+    });
+    
+    
+});
+</script>
+</head>
+<body>
+
+<button id ="getButton" >Send an HTTP GET request to a page and get the result back</button>
+<button id ="postButton" >Send an HTTP POST request to a page and get the result back</button>
+
+<div class="container">
+    <div class="row">
+        <div class="form_bg">
+            <form>
+                 <h2 class="text-center">Login Page</h2>
+                <br/>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="userid" placeholder="User id">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="pwd" placeholder="Password">
+                </div>
+                <br/>
+                <div class="align-center">
+                    <button type="submit" class="btn btn-default" id="login">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
